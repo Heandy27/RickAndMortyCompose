@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("kotlin-kapt")
-    id("com.google.dagger.hilt.android") version "2.51"
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -67,9 +67,10 @@ dependencies {
     kapt("androidx.room:room-compiler:2.8.4")
 
     // Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.59.1")
-    kapt("com.google.dagger:hilt-compiler:2.59.1")
-    implementation("androidx.hilt:hilt-navigation-compose:1.3.0")
+    implementation("com.google.dagger:hilt-android:2.57.2")
+    kapt("com.google.dagger:hilt-compiler:2.57.2")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
 
 
     implementation("io.coil-kt.coil3:coil-compose:3.3.0")
@@ -94,19 +95,19 @@ dependencies {
 
 
     // For Robolectric tests.
-    testImplementation("com.google.dagger:hilt-android-testing:2.59.1")
+    testImplementation("com.google.dagger:hilt-android-testing:2.57.2")
     // ...with Kotlin.
-    kaptTest("com.google.dagger:hilt-android-compiler:2.59.1")
+    kaptTest("com.google.dagger:hilt-android-compiler:2.57.2")
     // ...with Java.
-    testAnnotationProcessor("com.google.dagger:hilt-android-compiler:2.59.1")
+    testAnnotationProcessor("com.google.dagger:hilt-android-compiler:2.57.2")
 
 
     // For instrumented tests.
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.59.1")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.57.2")
     // ...with Kotlin.
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.59.1")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.57.2")
     // ...with Java.
-    androidTestAnnotationProcessor("com.google.dagger:hilt-android-compiler:2.59.1")
+    androidTestAnnotationProcessor("com.google.dagger:hilt-android-compiler:2.57.2")
 
 
 

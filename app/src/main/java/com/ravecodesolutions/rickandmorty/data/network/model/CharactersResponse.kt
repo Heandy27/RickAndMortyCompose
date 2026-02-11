@@ -2,7 +2,7 @@ package com.ravecodesolutions.rickandmorty.data.network.model
 
 data class Welcome (
     val info: Info,
-    val results: List<Result>
+    val results: List<ResultCharacter>
 )
 
 data class Info (
@@ -12,7 +12,7 @@ data class Info (
     val prev: Any? = null
 )
 
-data class Result (
+data class ResultCharacter (
     val id: Long,
     val name: String,
     val status: String,

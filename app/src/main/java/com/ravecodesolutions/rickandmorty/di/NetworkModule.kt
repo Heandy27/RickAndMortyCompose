@@ -19,10 +19,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    // let decoder: JSONDecoder = {
-    //    let decoder = JSONDecoder()
-    //    return decoder
-    //}()
+    // let decoder: JSONDecoder
     @Provides
     fun providesMoshi(): Moshi {
         return Moshi.Builder()
@@ -31,21 +28,9 @@ object NetworkModule {
     }
 
     // let session: URLSession = {
-    //    let config = URLSessionConfiguration.default
-    //    return URLSession(configuration: config)
-    //}()
     @Provides
     fun providesOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-// var request = URLRequest(url: url)
-//request.addValue("Bearer TOKEN", forHTTPHeaderField: "Authorization")
-//                .addInterceptor { chain ->
-//                    val original = chain.request()
-//                    val newRequest = original.newBuilder()
-//                        .addHeader("Authorization", "Bearer AquiElToken")
-//                        .build()
-//                    chain.proceed(newRequest)
-//                }
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })

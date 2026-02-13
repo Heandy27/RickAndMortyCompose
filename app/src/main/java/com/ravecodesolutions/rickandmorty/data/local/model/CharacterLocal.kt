@@ -36,6 +36,6 @@ fun List<CharacterLocal>.toUI(): List<Character> = this.map {
 
 fun CharacterLocal.toUI(): Character = with(this) {
     Character(id, name, status, species, type, gender,
-        LocationCharacter(name, url), LocationCharacter(name, url), image, episodes.split(","), url, created)
+        LocationCharacter(originName, ""), LocationCharacter(originName, ""), image, episodes.split(","), url, created)
 }
 

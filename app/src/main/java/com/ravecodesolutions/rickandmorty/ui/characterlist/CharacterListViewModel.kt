@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ravecodesolutions.rickandmorty.data.Repository
 import com.ravecodesolutions.rickandmorty.data.network.model.ResultCharacter
+import com.ravecodesolutions.rickandmorty.domain.Character
 import com.ravecodesolutions.rickandmorty.domain.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,8 +21,8 @@ import kotlin.math.log
 class CharacterListViewModel @Inject constructor(
     private val repository: Repository
 ): ViewModel(){
-    private val _heroes = MutableStateFlow<UIState<List<ResultCharacter>>>(UIState.Loading)
-    val heroes: StateFlow<UIState<List<ResultCharacter>>> = _heroes.asStateFlow()
+    private val _heroes = MutableStateFlow<UIState<List<Character>>>(UIState.Loading)
+    val heroes: StateFlow<UIState<List<Character>>> = _heroes.asStateFlow()
 
     init {
         getCharacters()
@@ -39,12 +40,10 @@ class CharacterListViewModel @Inject constructor(
 
             result.onSuccess { characters ->
                 _heroes.value = UIState.Success(characters)
-                Log.d("HERO_DEBUG", "este es el perosnaje ${characters.size}")
             }
 
             result.onFailure { error ->
                 _heroes.value = UIState.Error(error.message ?: "Unkown Error")
-                Log.d("HERO_DEBUG", "este es el perosnaje ${error.message}")
             }
         }
     }

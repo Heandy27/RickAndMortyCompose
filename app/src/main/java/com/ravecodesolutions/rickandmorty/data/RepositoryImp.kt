@@ -1,22 +1,25 @@
 package com.ravecodesolutions.rickandmorty.data
 
 import android.util.Log
+import com.ravecodesolutions.rickandmorty.data.local.LocalDataSource
+import com.ravecodesolutions.rickandmorty.data.local.model.toUI
 import com.ravecodesolutions.rickandmorty.data.network.NetworkDataSource
 import com.ravecodesolutions.rickandmorty.data.network.model.ResultCharacter
+import com.ravecodesolutions.rickandmorty.data.network.model.toLocal
+import com.ravecodesolutions.rickandmorty.domain.Character
 import javax.inject.Inject
 
 class RepositoryImp @Inject constructor(
-    private val networkDataSource: NetworkDataSource
+    private val networkDataSource: NetworkDataSource,
+    private val localDataSource: LocalDataSource
 ): Repository {
-    override suspend fun getCharacters(): List<ResultCharacter> {
-        val characters = networkDataSource.getCharacters()
+    override suspend fun getCharacters(): List<Character> {
+        val localCharacters = localDataSource.getCharacters()
 
-        Log.d("HERO_DEBUG", "Cantidad recibida: ${characters.results.size}")
-
-        characters.results.forEach {
-            Log.d("HERO_DEBUG", "Hero: ${it.name}")
+        if (localCharacters.isEmpty()) {
+            val remoteCharacters = networkDataSource.getCharacters().results
+            localDataSource.insertCharacters(remoteCharacters.toLocal())
         }
-
-        return characters.results
+        return localDataSource.getCharacters().toUI()
     }
 }

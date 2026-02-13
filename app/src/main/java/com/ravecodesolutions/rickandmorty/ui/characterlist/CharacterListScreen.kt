@@ -27,10 +27,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.ravecodesolutions.rickandmorty.domain.Character
+import com.ravecodesolutions.rickandmorty.domain.LocationCharacter
 
 @Composable
 fun CharacterGridList(
-    characters: List<ResultCharacter>,
+    characters: List<Character>,
     modifier: Modifier = Modifier,
     onCharacterClick: (Long) -> Unit
 ) {
@@ -62,7 +64,7 @@ fun My_Preview_GridList() {
 
 @Composable
 fun CharacterGridItem(
-    character: ResultCharacter,
+    character: Character,
     onCharacterClick: (Long) -> Unit,
     modifier: Modifier = Modifier
 
@@ -98,18 +100,18 @@ fun CharacterGridItem(
 @Composable
 fun CharacterGridItem_Preview() {
     CharacterGridItem(
-        ResultCharacter(
+        Character(
             id = 1L,
             name = "Zyron Vega",
             status = "Alive",
             species = "Human",
             type = "Cyber-Enhanced",
             gender = "Male",
-            origin = Location(
+            origin = LocationCharacter(
                 name = "Neo Earth",
                 url = "https://api.fakeuniverse.com/location/1"
             ),
-            location = Location(
+            location = LocationCharacter(
                 name = "Mars Colony Alpha",
                 url = "https://api.fakeuniverse.com/location/23"
             ),
@@ -129,18 +131,18 @@ fun CharacterGridItem_Preview() {
 
 
 private fun generateCharacters() = (0 until 10).map {
-    ResultCharacter(
+    Character(
         id = 1L,
         name = "Zyron Vega",
         status = "Alive",
         species = "Human",
         type = "Cyber-Enhanced",
         gender = "Male",
-        origin = Location(
+        origin = LocationCharacter(
             name = "Neo Earth",
             url = "https://api.fakeuniverse.com/location/1"
         ),
-        location = Location(
+        location = LocationCharacter(
             name = "Mars Colony Alpha",
             url = "https://api.fakeuniverse.com/location/23"
         ),

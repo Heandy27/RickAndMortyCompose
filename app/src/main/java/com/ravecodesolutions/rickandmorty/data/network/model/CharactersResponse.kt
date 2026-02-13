@@ -1,5 +1,7 @@
 package com.ravecodesolutions.rickandmorty.data.network.model
 
+import com.ravecodesolutions.rickandmorty.data.local.model.CharacterLocal
+
 data class Welcome (
     val info: Info,
     val results: List<ResultCharacter>
@@ -31,3 +33,12 @@ data class Location (
     val name: String,
     val url: String
 )
+
+
+fun List<ResultCharacter>.toLocal(): List<CharacterLocal> = this.map {
+    it.toLocal()
+}
+
+fun ResultCharacter.toLocal(): CharacterLocal = with(this) {
+    CharacterLocal(id, name, status, species, type, gender, origin.name, location.name, image, episode.joinToString(","), url, created )
+}

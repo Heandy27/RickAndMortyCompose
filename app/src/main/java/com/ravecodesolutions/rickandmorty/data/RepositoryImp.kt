@@ -4,6 +4,7 @@ import android.util.Log
 import com.ravecodesolutions.rickandmorty.data.local.LocalDataSource
 import com.ravecodesolutions.rickandmorty.data.local.model.toUI
 import com.ravecodesolutions.rickandmorty.data.network.NetworkDataSource
+import com.ravecodesolutions.rickandmorty.data.network.model.CharacterSingleResponse
 import com.ravecodesolutions.rickandmorty.data.network.model.ResultCharacter
 import com.ravecodesolutions.rickandmorty.data.network.model.toLocal
 import com.ravecodesolutions.rickandmorty.domain.Character
@@ -21,5 +22,10 @@ class RepositoryImp @Inject constructor(
             localDataSource.insertCharacters(remoteCharacters.toLocal())
         }
         return localDataSource.getCharacters().toUI()
+    }
+
+    override suspend fun fetchCharacterById(id: Long): CharacterSingleResponse {
+
+        return networkDataSource.fetchHeroById(id)
     }
 }

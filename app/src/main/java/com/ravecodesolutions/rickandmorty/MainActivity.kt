@@ -27,11 +27,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.ravecodesolutions.rickandmorty.data.network.model.ResultCharacter
 import com.ravecodesolutions.rickandmorty.domain.UIState
+import com.ravecodesolutions.rickandmorty.ui.characterdetail.CharacterDetailScreen
 import com.ravecodesolutions.rickandmorty.ui.characterlist.CharacterGridItem
 import com.ravecodesolutions.rickandmorty.ui.characterlist.CharacterGridList
 import com.ravecodesolutions.rickandmorty.ui.characterlist.CharacterListViewModel
+import com.ravecodesolutions.rickandmorty.ui.theme.NavigationScreenSealed
 import com.ravecodesolutions.rickandmorty.ui.theme.RickAndMortyTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,7 +51,30 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             RickAndMortyTheme {
-                MainScreen()
+                val navController = rememberNavController()
+                NavHost(navController, NavigationScreenSealed.CharacterList.route) {
+                    // Pantalla Lista Grid
+                    composable(NavigationScreenSealed.CharacterList.route) {
+                        MainScreen(navController)
+                    }
+
+                    // Pantalla Detalle
+                    composable(
+                        route = NavigationScreenSealed.CharacterDetail.route,
+                        arguments = listOf(
+                            navArgument("id") {
+                                type = NavType.LongType
+                            }
+                        )
+                    ) { backStackEntry ->
+
+                        val id = backStackEntry.arguments?.getLong("id")
+
+                        if (id != null) {
+                            CharacterDetailScreen(id, navController)
+                        }
+                    }
+                }
             }
         }
     }
@@ -52,7 +83,10 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun MainScreen(characterListViewModel: CharacterListViewModel = hiltViewModel()) {
+private fun MainScreen(
+    navcontroller: NavHostController,
+    characterListViewModel: CharacterListViewModel = hiltViewModel()
+) {
     val state by characterListViewModel.heroes.collectAsState()
 
     Scaffold() { innerPadding ->
@@ -78,7 +112,11 @@ private fun MainScreen(characterListViewModel: CharacterListViewModel = hiltView
                 CharacterGridList(
                     (state as UIState.Success).data,
                     modifier = Modifier.padding(innerPadding),
-                    onCharacterClick = {}
+                    onCharacterClick = { id ->
+                        navcontroller.navigate(
+                            NavigationScreenSealed.CharacterDetail.createRoute(id)
+                        )
+                    }
                 )
             }
         }

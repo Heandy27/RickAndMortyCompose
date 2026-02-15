@@ -6,6 +6,7 @@ import com.ravecodesolutions.rickandmorty.data.local.model.toUI
 import com.ravecodesolutions.rickandmorty.data.network.NetworkDataSource
 import com.ravecodesolutions.rickandmorty.data.network.model.CharacterSingleResponse
 import com.ravecodesolutions.rickandmorty.data.network.model.ResultCharacter
+import com.ravecodesolutions.rickandmorty.data.network.model.Welcome
 import com.ravecodesolutions.rickandmorty.data.network.model.toLocal
 import com.ravecodesolutions.rickandmorty.domain.Character
 import javax.inject.Inject

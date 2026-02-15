@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ravecodesolutions.rickandmorty.data.Repository
 import com.ravecodesolutions.rickandmorty.data.network.model.CharacterSingleResponse
+import com.ravecodesolutions.rickandmorty.data.network.model.Welcome
 import com.ravecodesolutions.rickandmorty.domain.Character
 import com.ravecodesolutions.rickandmorty.domain.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel

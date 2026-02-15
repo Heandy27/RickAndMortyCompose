@@ -9,12 +9,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -22,14 +22,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.ravecodesolutions.rickandmorty.data.network.model.CharacterSingleResponse
@@ -39,7 +35,7 @@ import com.ravecodesolutions.rickandmorty.domain.UIState
 @Composable
 fun CharacterDetailScreen(
     id: Long,
-    navController: NavHostController,
+    navcontroller: NavHostController,
     viewModel: CharacterDetailViewModel = hiltViewModel()
 ) {
 val state by viewModel.stateDetail.collectAsState()
@@ -49,7 +45,20 @@ val state by viewModel.stateDetail.collectAsState()
     }
 
 
-    Scaffold() { innerPadding ->
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {  },
+                navigationIcon = {
+                    Button(onClick = {
+                        navcontroller.popBackStack()
+                    }) {
+                        Text("Back")
+                    }
+                }
+            )
+        }
+    ) { innerPadding ->
         when (state) {
             is UIState.Error -> {
                 Box(modifier = Modifier.fillMaxSize(), Alignment.Center) {
@@ -71,7 +80,7 @@ val state by viewModel.stateDetail.collectAsState()
             is UIState.Success -> {
 
                 val character = (state as UIState.Success<CharacterSingleResponse>).data
-                Box(modifier = Modifier.fillMaxSize()) {
+                Box(modifier = Modifier.fillMaxSize().padding(innerPadding)) {
                     Column(modifier = Modifier.fillMaxSize().background(Color.DarkGray), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                         AsyncImage(
                             character.image,

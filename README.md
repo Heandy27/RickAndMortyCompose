@@ -4,7 +4,7 @@
 
 <div style="display: flex; justify-content: center; align-items: center;">
 <img src="https://i.postimg.cc/gJyRrRTB/Chat_GPT_Image_Feb_16_2026_10_46_22_AM.png" alt="map" width="200">
-<img src="https://i.postimg.cc/DZQsmsNh/Chat_GPT_Image_Feb_16_2026_10_48_03_AM.pngg" alt="map" width="200">
+<img src="https://i.postimg.cc/DZQsmsNh/Chat_GPT_Image_Feb_16_2026_10_48_03_AM.png" alt="map" width="200">
 </div>
 
 ---

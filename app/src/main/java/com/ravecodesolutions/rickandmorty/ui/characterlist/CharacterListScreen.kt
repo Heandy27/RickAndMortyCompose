@@ -1,7 +1,9 @@
 package com.ravecodesolutions.rickandmorty.ui.characterlist
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,6 +25,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.sp
@@ -76,7 +79,7 @@ fun CharacterGridItem(
         shape = RoundedCornerShape(20.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
-        Column(modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(20.dp)) {
+        Column(modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(10.dp)) {
 
 
             val isInPreview = LocalInspectionMode.current
@@ -91,6 +94,21 @@ fun CharacterGridItem(
             )
 
             Text(character.name, fontSize = 20.sp, maxLines = 1)
+
+                Text(
+                    text = character.status,
+                    modifier = Modifier.clip(
+                        RoundedCornerShape(16.dp)).background(Color.DarkGray).padding(10.dp),
+                    color = when (character.status) {
+                        "Alive" -> Color.Green
+                        "Dead" -> Color.Red
+                        else -> Color.Gray
+                    },
+                    fontSize = 20.sp
+
+                )
+
+
         }
 
     }

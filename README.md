@@ -12,7 +12,7 @@
 ## 📱 Features
 
 - **Characters List Grid:** Organizes views in an orderly manner into rows and columns.
-- **Character Details:** Dedicated detail screen (supports rich content and external links).
+- **Character Details:** Dedicated detail screen.
 - **Offline Support (Room):** Persist characters on device.
 - **Modern Navigation (NavHost):** Smooth navigation between screens in Compose.
 - **MVVM:** Clear separation of UI, state, and business logic.

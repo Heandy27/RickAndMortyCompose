@@ -7,6 +7,7 @@ import com.ravecodesolutions.rickandmorty.data.Repository
 import com.ravecodesolutions.rickandmorty.data.network.model.CharacterSingleResponse
 import com.ravecodesolutions.rickandmorty.data.network.model.Welcome
 import com.ravecodesolutions.rickandmorty.domain.Character
+import com.ravecodesolutions.rickandmorty.domain.CharacterDetail
 import com.ravecodesolutions.rickandmorty.domain.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -22,9 +23,9 @@ class CharacterDetailViewModel @Inject constructor(
     private val repository: Repository
 ): ViewModel() {
 
-    private val _stateDetail = MutableStateFlow<UIState<CharacterSingleResponse>>(UIState.Loading)
+    private val _stateDetail = MutableStateFlow<UIState<CharacterDetail>>(UIState.Loading)
 
-    val stateDetail: StateFlow<UIState<CharacterSingleResponse>> = _stateDetail.asStateFlow()
+    val stateDetail: StateFlow<UIState<CharacterDetail>> = _stateDetail.asStateFlow()
 
     fun fetchCharacterById(id: Long) {
         viewModelScope.launch {

@@ -29,6 +29,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.ravecodesolutions.rickandmorty.data.network.model.CharacterSingleResponse
+import com.ravecodesolutions.rickandmorty.domain.CharacterDetail
 import com.ravecodesolutions.rickandmorty.domain.UIState
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -79,7 +80,7 @@ val state by viewModel.stateDetail.collectAsState()
             }
             is UIState.Success -> {
 
-                val character = (state as UIState.Success<CharacterSingleResponse>).data
+                val character = (state as UIState.Success<CharacterDetail>).data
                 Box(modifier = Modifier.fillMaxSize().padding(innerPadding)) {
                     Column(modifier = Modifier.fillMaxSize().background(Color.DarkGray), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                         AsyncImage(

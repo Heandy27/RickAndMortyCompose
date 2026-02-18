@@ -4,8 +4,9 @@ import com.ravecodesolutions.rickandmorty.data.network.model.CharacterSingleResp
 import com.ravecodesolutions.rickandmorty.data.network.model.ResultCharacter
 import com.ravecodesolutions.rickandmorty.data.network.model.Welcome
 import com.ravecodesolutions.rickandmorty.domain.Character
+import com.ravecodesolutions.rickandmorty.domain.CharacterDetail
 
 interface Repository {
     suspend fun getCharacters(): List<Character>
-    suspend fun fetchCharacterById(id: Long): CharacterSingleResponse
+    suspend fun fetchCharacterById(id: Long): CharacterDetail
 }

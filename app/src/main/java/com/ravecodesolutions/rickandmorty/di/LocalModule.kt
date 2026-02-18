@@ -6,6 +6,7 @@ import com.ravecodesolutions.rickandmorty.data.local.LocalDataSource
 import com.ravecodesolutions.rickandmorty.data.local.LocalDataSourceImp
 import com.ravecodesolutions.rickandmorty.data.local.db.CharacterDao
 import com.ravecodesolutions.rickandmorty.data.local.db.CharacterDatabase
+import com.ravecodesolutions.rickandmorty.data.local.db.CharacterDetailDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,5 +36,10 @@ object LocalModule {
     @Provides
     fun provideLocalDataSource(localDataSourceImp: LocalDataSourceImp): LocalDataSource {
         return localDataSourceImp
+    }
+
+    @Provides
+    fun provateCharacterDetailDao(db: CharacterDatabase): CharacterDetailDao {
+        return db.characterDetailDao()
     }
 }

@@ -9,6 +9,7 @@ import com.ravecodesolutions.rickandmorty.data.network.model.ResultCharacter
 import com.ravecodesolutions.rickandmorty.data.network.model.Welcome
 import com.ravecodesolutions.rickandmorty.data.network.model.toLocal
 import com.ravecodesolutions.rickandmorty.domain.Character
+import com.ravecodesolutions.rickandmorty.domain.CharacterDetail
 import javax.inject.Inject
 
 class RepositoryImp @Inject constructor(
@@ -25,8 +26,17 @@ class RepositoryImp @Inject constructor(
         return localDataSource.getCharacters().toUI()
     }
 
-    override suspend fun fetchCharacterById(id: Long): CharacterSingleResponse {
+    override suspend fun fetchCharacterById(id: Long): CharacterDetail {
 
-        return networkDataSource.fetchHeroById(id)
+        val localCharacterDetail = localDataSource.getCharacterDetail(id)
+
+        if (localCharacterDetail == null) {
+            val remoteCharacterDetail = networkDataSource.fetchHeroById(id)
+            localDataSource.insertCharacterDetail(remoteCharacterDetail.toLocal())
+        }
+
+        return localDataSource.getCharacterDetail(id).toUI()
     }
+
+
 }
